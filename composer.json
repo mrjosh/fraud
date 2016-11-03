@@ -20,5 +20,10 @@
       "Josh\\Fraud\\": "src/"
     }
   },
+  "autoload-dev": {
+    "files": [
+      "tests/helpers.php"
+    ]
+  },
   "license": "MIT"
 }
