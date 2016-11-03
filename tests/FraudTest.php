@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
  * @since  3 Nov 2016
  */
 
-class FraudTest extends TestCase
+class FraudTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Set request of user
