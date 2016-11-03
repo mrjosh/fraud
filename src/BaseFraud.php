@@ -33,7 +33,10 @@ class BaseFraud
      *
      * @var array
      */
-    private $bots = [];
+    private $bots = [
+        'crawler',
+        'spider'
+    ];
 
     /**
      * BaseFraud constructor.
