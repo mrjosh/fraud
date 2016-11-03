@@ -40,13 +40,15 @@ class BaseFraud
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->agent = $request->header('user-agent');
+
         // if exists bots file then include list
         if(file_exists(config_path('bots.php'))) {
 
             // require bots list
-            $this->bots = include config_path('bots.php');
+            $this->bots = require config_path('bots.php');
         }
     }
 
@@ -61,9 +63,9 @@ class BaseFraud
 
         $agent->setUserAgent($this->agent);
         if(! $agent->browser() 
-            || ! $agent->device() 
-            || ! $agent->platform($this->agent) 
-            || ! $agent->version($agent->browser()) 
+            || ! $agent->device()
+            || ! $agent->platform($this->agent)
+            || ! $agent->version($agent->browser())
             || ! $agent->version($agent->platform())
         ) {
             return true;
@@ -151,9 +153,9 @@ class BaseFraud
      * @param  $class
      * @return array
      */
-    public function methods($class)
+    public function methods()
     {
-        $methods = get_class_methods($class);
+        $methods = get_class_methods($this);
 
         foreach ($methods as $key => $method){
             if(substr($method, 0, 2) !== 'is' || $this->checkExcept($method)) {
