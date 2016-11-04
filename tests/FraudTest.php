@@ -35,21 +35,25 @@ class FraudTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Make middleware instance
+     *
+     * @return \Josh\Fraud\FraudMiddleware
+     */
+    public function middleware()
+    {
+        return new Josh\Fraud\FraudMiddleware($this->request);
+    }
+
+    /**
      * Test user agent of user
      */
     public function testUserAgent()
     {
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
+        $this->assertFalse($this->middleware()->isUserAgent());
 
-        $this->assertFalse($middleware->isUserAgent());
+        $this->request->headers->replace([ 'user-agent' => '' ]);
 
-        $this->request->headers->replace([
-            'user-agent' => '*****'
-        ]);
-
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
-
-        $this->assertTrue($middleware->isUserAgent());
+        $this->assertTrue($this->middleware()->isUserAgent());
     }
 
     /**
@@ -57,17 +61,11 @@ class FraudTest extends PHPUnit_Framework_TestCase
      */
     public function testIsCurl()
     {
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
+        $this->assertFalse($this->middleware()->isCurl());
 
-        $this->assertFalse($middleware->isCurl());
+        $this->request->headers->replace([ 'user-agent' => 'curl/7.49.1' ]);
 
-        $this->request->headers->replace([
-            'user-agent' => 'curl/7.49.1'
-        ]);
-
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
-
-        $this->assertTrue($middleware->isCurl());
+        $this->assertTrue($this->middleware()->isCurl());
     }
 
     /**
@@ -75,17 +73,11 @@ class FraudTest extends PHPUnit_Framework_TestCase
      */
     public function testIsHttpie()
     {
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
+        $this->assertFalse($this->middleware()->isHttpie());
 
-        $this->assertFalse($middleware->isHttpie());
+        $this->request->headers->replace([ 'user-agent' => 'HTTPie/0.9.4' ]);
 
-        $this->request->headers->replace([
-            'user-agent' => 'HTTPie/0.9.4'
-        ]);
-
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
-
-        $this->assertTrue($middleware->isHttpie());
+        $this->assertTrue($this->middleware()->isHttpie());
     }
 
     /**
@@ -93,17 +85,11 @@ class FraudTest extends PHPUnit_Framework_TestCase
      */
     public function testIsRobot()
     {
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
+        $this->assertFalse($this->middleware()->isRobot());
 
-        $this->assertFalse($middleware->isRobot());
+        $this->request->headers->replace([ 'user-agent' => 'crawler' ]);
 
-        $this->request->headers->replace([
-            'user-agent' => 'crawler'
-        ]);
-
-        $middleware = new Josh\Fraud\FraudMiddleware($this->request);
-
-        $this->assertTrue($middleware->isRobot());
+        $this->assertTrue($this->middleware()->isRobot());
     }
 
 }
