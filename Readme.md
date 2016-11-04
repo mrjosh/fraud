@@ -1,9 +1,7 @@
-[![Build Status](https://travis-ci.org/iamalirezaj/fraud.svg?branch=develop)](https://travis-ci.org/iamalirezaj/fraud)
-[![Latest Stable Version](https://poser.pugx.org/josh/fraud/v/stable)](https://packagist.org/packages/josh/fraud)
-[![Total Downloads](https://poser.pugx.org/josh/fraud/downloads)](https://packagist.org/packages/josh/fraud)
-[![Latest Unstable Version](https://poser.pugx.org/josh/fraud/v/unstable)](//packagist.org/packages/josh/fraud)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/iamalirezaj/fraud/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/iamalirezaj/fraud/?branch=develop)
-[![License](https://poser.pugx.org/josh/fraud/license)](https://packagist.org/packages/josh/fraud)
+[![Build Status](https://img.shields.io/travis/iamalirezaj/fraud/develop.svg?style=flat-square)](https://travis-ci.org/iamalirezaj/fraud)
+[![Total Downloads](https://img.shields.io/packagist/dt/josh/fraud.svg?style=flat-square)](https://packagist.org/packages/josh/fraud)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/iamalirezaj/fraud.svg?style=flat-square)](https://scrutinizer-ci.com/g/iamalirezaj/fraud/?branch=develop)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://packagist.org/packages/josh/fraud)
 
 # Fraud Middleware
 Fraud Middleware for laravel
