@@ -90,6 +90,23 @@ class FraudTest extends PHPUnit_Framework_TestCase
         $this->request->headers->replace([ 'user-agent' => 'crawler' ]);
 
         $this->assertTrue($this->middleware()->isRobot());
+
+        $this->request->headers->replace([ 'user-agent' => 'inktomi' ]);
+
+        $this->assertTrue($this->middleware()->isRobot());
+
+        $this->request->headers->replace([ 'user-agent' => 'Googlebot' ]);
+
+        $this->assertTrue($this->middleware()->isRobot());
+
+        $this->request->headers->replace([ 'user-agent' => 'Teoma' ]);
+
+        $this->assertTrue($this->middleware()->isRobot());
+
+        $this->request->headers->replace([ 'user-agent' => 'Purebot' ]);
+
+        $this->assertTrue($this->middleware()->isRobot());
+
     }
 
 }

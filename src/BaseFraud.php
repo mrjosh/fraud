@@ -48,12 +48,16 @@ class BaseFraud
         $this->agent = $request->header('user-agent');
 
         if(function_exists('config_path')){
+
             // if exists bots file then include list
             if(file_exists(config_path('bots.php'))) {
 
                 // require bots list
                 $this->bots = require config_path('bots.php');
             }
+
+        } else {
+            $this->bots = require __DIR__ . '/../bots.php';
         }
     }
 
