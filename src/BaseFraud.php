@@ -17,9 +17,9 @@ class BaseFraud
     /**
      * User agent
      *
-     * @var string
+     * @var string|array
      **/
-    protected $agent = null;
+    protected $agent;
 
     /**
      * check except methods in class
@@ -40,24 +40,23 @@ class BaseFraud
 
     /**
      * BaseFraud constructor.
-     *
-     * @return void
      */
     public function __construct(Request $request)
     {
+        // set user agent
         $this->agent = $request->header('user-agent');
 
-        if(function_exists('config_path')){
+        if(function_exists('config_path')) {
 
             // if exists bots file then include list
             if(file_exists(config_path('bots.php'))) {
 
                 // require bots list
-                $this->bots = require config_path('bots.php');
+                $this->bots = include config_path('bots.php');
             }
 
         } else {
-            $this->bots = require __DIR__ . '/../bots.php';
+            $this->bots = include __DIR__ . '/../bots.php';
         }
     }
 
@@ -104,7 +103,6 @@ class BaseFraud
      *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
      * @since  27 Oct , 2016
-     * @param  \Illuminate\Http\Request $request
      * @return boolean
      */
     public function isHttpie()
